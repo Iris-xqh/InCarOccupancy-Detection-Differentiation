@@ -16,6 +16,28 @@
 
 
 
+## Hardware Setup
+
+We used 2 NUCs with 3 antennas each, one as transmitter and another as receiver. 
+
+They are both powered with a portable power bank. 
+The NUCs were setup properly, just run “ifconfig” and “iwconfig” to differentiate between the transmitter and receiver and retrieve their IP address. Then a laptop is connected to both NUCs using a 5-port switch, also powered by a portable power bank. 
+
+#### Detailed steps of how to conduct the experiment:
+
+Change the IP address of the laptop so that we could use SSH to connect the laptop to both NUCs. 
+Turn on both NUCs, use terminal to redirect to the correct directory, which is “CSIExperiments-ETH”.
+First, on the receiver, run “sudo receive.sh” with one parameter, which is the name of the file to be saved. The receiver will enter a state to wait for the signals from transmitter.
+
+Next, on the transmitter, run “sudo transmit.sh” with parameters. One parameter would be the total package count, another would be the time interval (in microsecond). It would automatically stop after the designated package count * time interval (e.g. 100 package, 100000 microsecond interval = 10s total time).
+Lastly, press ctrl + c on the receiver to stop the process. A consecutive string of letter “r” would appear exactly package count times.
+
+Repeat as many experiments as you like and get a bunch of files containing CSI data. Export them to the local machine and then process using Matlab and Python.
+
+
+
+
+
 ## Python Code Instructions
 
 #### 1.Occupancy Detection
