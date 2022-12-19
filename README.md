@@ -4,15 +4,21 @@
 
 ## File Structure 
 
-- **Data**        --- sample test data
+- **Data**        **--- sample test data**
   - emptyCar.mat     				--- sample data of an empty car 
   - emptyToOccupancy.mat   --- sample data of a human entering the car (from empty to occupied)
   - human_1.mat                      --- sample data of an human occupancy
   - human_2.mat                      --- sample data of an human occupancy
   - dog.mat                                --- sample data of a dog occupancy
 
-- **OccupancyDetect.py**             --- code for occupancy detection algorithm
-- **Differentiate.py**     --- code for occupancy differentiation algorithm
+- **OccupancyDetect.py**             **--- code for occupancy detection algorithm**
+- **Differentiate.py**     **--- code for occupancy differentiation algorithm**
+- **MatLab**
+  - process.m                         --- run this file to process raw CSI data
+  - get_scaled_csi.m              --- read in the CSI trace file
+  - read_bf_file.m                  --- parse CSI data for all
+
+
 
 
 
@@ -38,9 +44,33 @@ Repeat as many experiments as you like and get a bunch of files containing CSI d
 
 
 
+
+
 ## Pre-processing data with MATLAB
 
+Run process.m file to process the raw data.
 
+**Input**: CSI trace file from the previous data collecting step
+
+**Output**: 1. save the parsed CSI data in .mat file
+
+​			    2. a heat map figure presenting the CSI data for all subcarriers 
+
+```matlab
+csi_trace = read_bf_file("test_30_1_empty_to_one_03");
+
+for i = 1:30
+    csi_entry = csi_trace{i};
+    csi = get_scaled_csi(csi_entry);
+    csiAll(i,:,:,:) = csi;
+end
+
+save('ssss.mat','csiAll')
+% plot a heat map figure
+figure;imagesc(db(abs(squeeze(csiAll(:,1,:)))).')
+```
+
+#### 
 
 
 
